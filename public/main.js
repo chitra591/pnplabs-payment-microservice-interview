@@ -3,7 +3,7 @@ var selected_account = document.getElementById('selected_account')
 var account_id, withdrawal_amount;
 
 selected_account.addEventListener('change', function () {
-  console.log("main.js : selected_account eventlistner");
+  document.getElementById('serverResponse').style.display = "none";
   account_id = document.getElementById('selected_account').value;
   fetch('check_balance/'+account_id, {
     method: 'get'
@@ -12,14 +12,11 @@ selected_account.addEventListener('change', function () {
     if (res.ok) return res.json()
   })
   .then(data => {
-    console.log(data.balance[0].balance)
-
     document.getElementById('balance').innerHTML = data.balance[0].balance
   })
 })
 
 update.addEventListener('click', function () {
-  console.log("main.js : update eventlistner");
   account_id = document.getElementById('selected_account').value;
   withdrawal_amount = document.getElementById('withdrawal_amount').value;
   fetch('withdraw', {
@@ -31,10 +28,18 @@ update.addEventListener('click', function () {
     })
   })
   .then(response => {
+    console.log('response : '+response);
+    console.log(response);
     if (response.ok) return response.json()
   })
   .then(data => {
-    console.log(data)
-    window.location.reload(true)
+    if(data){
+      console.log(data.serverResponse);
+      document.getElementById('serverResponse_type').innerHTML = data.serverResponse.type
+      document.getElementById('serverResponse_message').innerHTML = data.serverResponse.message
+      document.getElementById('serverResponse').style.display = "block";
+    }else {
+      window.location.reload()
+    }
   })
 })

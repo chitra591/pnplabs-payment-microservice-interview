@@ -51,16 +51,21 @@ app.put('/withdraw', (req, res) => {
   ])
 
   filtered_result.forEach((result) => {
+    var new_balance
     balance = result.balance
-    var new_balance = balance-req.body.withdrawal_amount
+    if(req.body.withdrawal_amount <= balance) {
+      new_balance = balance-req.body.withdrawal_amount
 
-    db.collection('users').update(
-      {'id': result.user_id, 'accounts.id': result.account_id},
-      {$set:{'accounts.$.balance': new_balance }},
-      (err, result) => {
-        if (err) return console.log("ERROR: "+err);
-        res.redirect('/')
-      }
-    )
+      db.collection('users').update(
+        {'id': result.user_id, 'accounts.id': result.account_id},
+        {$set:{'accounts.$.balance': new_balance }},
+        (err, result) => {
+          if (err) return console.log("ERROR: "+err);
+          res.redirect('/')
+        }
+      )
+    }else {
+      res.send({serverResponse: {type: 'ERROR', message: 'Insufficient balance.'}})
+    }
   })
 })
