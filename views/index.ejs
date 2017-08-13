@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Payment Microservice</title>
+  </head>
+  <body>
+    <form action="/quotes" method="POST">
+      <select id="selected_account">
+        <option value="0">--SELECT--</option>
+        <% for(var i=0; i<users.length; i++) {%>
+          <% for(var j=0; j<users[i].accounts.length; j++) {%>
+            <option value="<%= users[i].accounts[j].id %>"><%= users[i].name %> - <%= users[i].accounts[j].account_no %></option>
+          <% } %>
+        <% } %>
+      </select>
+      <label>Balance:</label><label id="balance">0.0</label>
+      <br>
+      <input type="text" id="withdrawal_amount" placeholder="0"/>
+    </form>
+    <div>
+      <button id="update"> Withdraw </button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

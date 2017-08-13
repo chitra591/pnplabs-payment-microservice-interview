@@ -1,0 +1,29 @@
+{
+  "name": "withdraw-api",
+  "version": "1.0.0",
+  "description": "pnblabs interview task",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chitra591/pnplabs-payment-microservice-interview.git"
+  },
+  "author": "Chitra Ganakumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chitra591/pnplabs-payment-microservice-interview/issues"
+  },
+  "homepage": "https://github.com/chitra591/pnplabs-payment-microservice-interview#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  }
+}
